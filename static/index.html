@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saerix - Agent Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar - File Tree -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>📁 Workspace</h2>
+                <button class="btn-icon" id="toggleSidebar" title="Kapat">◀</button>
+            </div>
+            <div class="tree-container" id="fileTree">
+                <div class="loading">Yükleniyor...</div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main">
+            <!-- Header -->
+            <header class="chat-header">
+                <button class="btn-icon" id="openSidebar" title="Dosya Aç">☰</button>
+                <div class="header-title">
+                    <span class="logo">🤖</span>
+                    <span>Saerix</span>
+                    <span class="badge">Agent Mode</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" id="newChat" title="Yeni Sohbet">➕</button>
+                    <button class="btn-icon" id="settingsBtn" title="Ayarlar">⚙</button>
+                </div>
+            </header>
+
+            <!-- Messages -->
+            <div class="messages" id="messages">
+                <div class="welcome">
+                    <div class="welcome-icon">🤖</div>
+                    <h3>Saerix Agent</h3>
+                    <p>Full-stack geliştirme, Siber Güvenlik, OSINT, Ağ Yönetimi, Teorik Fizik, UAV/İHA</p>
+                    <div class="examples">
+                        <button class="example-btn" data-msg="Projeyi listele">📂 Projeyi listele</button>
+                        <button class="example-btn" data-msg="src/main.py dosyasını oku">📄 Dosya oku</button>
+                        <button class="example-btn" data-msg="Port 8080'de ne var?">🔍 Port tara</button>
+                        <button class="example-btn" data-msg="example.com whois sorgula">🌐 WHOIS sorgula</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool Calls Panel (collapsible) -->
+            <div class="tool-panel" id="toolPanel">
+                <div class="tool-panel-header">
+                    <span>🔧 Tool Calls</span>
+                    <button class="btn-icon" id="closeToolPanel">×</button>
+                </div>
+                <div class="tool-list" id="toolList"></div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Mesaj yazın... (Shift+Enter = yeni satır, Enter = gönder)"
+                        rows="1"
+                    ></textarea>
+                    <button id="sendBtn" class="send-btn" title="Gönder (Enter)">➤</button>
+                </div>
+                <div class="input-hint">Agent modu aktif - araçları otomatik kullanır</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <h3>⚙️ Ayarlar</h3>
+            <div class="setting">
+                <label>Model: <span id="modelName">saerix</span></label>
+            </div>
+            <div class="setting">
+                <label>Temperature: <input type="range" id="tempSlider" min="0" max="1" step="0.1" value="0.1"></label>
+                <span id="tempValue">0.1</span>
+            </div>
+            <div class="setting">
+                <label>
+                    <input type="checkbox" id="streamToggle" checked> Streaming modu
+                </label>
+            </div>
+            <div class="setting">
+                <label>
+                    <input type="checkbox" id="showToolsToggle" checked> Tool call'ları göster
+                </label>
+            </div>
+            <button class="btn-primary" id="closeSettings">Kapat</button>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
